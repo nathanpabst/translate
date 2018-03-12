@@ -1,6 +1,4 @@
-//***********Dictionaries*************//
-
-var availableWords = ["happy", "merry", "new", "christmas", "year", "you", "hope", "i", "and", "hanukah", "kwanzaa", "jingle", "bells", "deck", "the", "halls", "wish", "joy", "of", "holly", "any", "returns", "seasons", "greetings", "holiday", "wishes", "greeting", "love", "let", "it", "snow",]
+//***********DICTIONARIES*************//
 
 var spanishDictionary = 
     {
@@ -19,55 +17,61 @@ var germanDictionary =
   {
     happy: "feliĉa", merry: "gaja", new: "nova", christmas: "kristnasko", year: "jaro",you: "vi", hope: "espero", i: "i", and: "kaj", hanukah: "hanukkah", kwanzaa: "kwanzaa", jingle: "enreta", bells: "sonoriloj", deck: "ferdeko", the: "la", halls: "salonoj", wish: "deziras", joy: "ĝojo", of: "deziras", holly: "hipo", any: "multaj", returns: "revenas", seasons:  "sezonoj", greetings: "salutoj", holiday: "feriado", wishes: "deziras", greeting: "saluto", love: "amo", let: "lasu", it: "gi", snow: "nego",
    };
-var input = ""; // placing the user's message in a variable
-var inputArray = [];
 var outputArray = [];
-var output = ""; // returns translated message to the user
 
-//***************Gather Function**************//
+//**************EVENT LISTENERS***************/
+
+var spanishButton = document.getElementById("spanish");
+var germanButton = document.getElementById("german");
+var esperantoButton = document.getElementById("esperanto");
+
+spanishButton.addEventListener("click", function(){gatherIt(spanishDictionary)});
+germanButton.addEventListener("click", function(){gatherIt(germanDictionary)});
+esperantoButton.addEventListener("click", function(){gatherIt(esperantoDictionary)});
+
+//***************GATHER FUNCTION**************//
 // Gather user input
 // Convert string to an array
 
-function gatherIt(input, languageId){
-    inputArray = input.toString(' ');
-    return;
+function gatherIt( languageId ){
+    outputArray = [];
+    var input = document.getElementById("input").value;
+    var words = input.toLowerCase().split(' ');
+    matchIt(words, languageId);
 }
 
-//**************Match Function*****************//
+//**************MATCH FUNCTION*****************//
 
 // If chosen language object does not contain array[i], display a not found message as output variable
 // If all the words match, call translate function
 
-function matchIt(gatherIt){
-    for (var i = 0; i < inputArray.length; i++){
-        // for (var j = 0; j < availableWords.length; j++){
-            if (inputArray[i].includes(availableWords[i])){ 
-            translateIt();
-            // }
-        } else{
-            output = prompt('Sorry, ' + inputArray[i] + ' is not found.');
+function matchIt(wordsArrays, dictionary){
+    for (var i = 0; i < wordsArrays.length; i++){
+        var wordResult = translateIt(wordsArrays[i], dictionary);
+        if (!wordResult){
+            prompt('Sorry, ' + wordsArrays[i] + ' is not found.');
+            outputArray.push("?");
+        }else{
+            outputArray.push(wordResult);
         }
     }
+    writeToDom(outputArray.join(" "));
 }
-console.log("merry christmas", spanishDictionary);
-//***************Translate Function************//
+
+//***************TRANSLATE FUNCTION************//
 
 // Passes in the input array from gather function and 2nd language
 // For loop to go over input array; possible 2nd for loop over language object
 // display translation to output variable
 
-// function translateIt(matchIt, languageId){
+function translateIt(word, language){
+var answer = language[word];
+return answer;
+}
 
-// }
+//******************WRITE TO THE DOM*****************//
 
-//******************Write to the DOM*****************//
-
-// function writeToDom(domString, domId){
-//     var myDiv = document.getElementById(domId);
-//     myDiv.innerHTML += domString;
-// }
-
-// gatherIt(input, languageId);
-
-
-
+function writeToDom(domString){
+    var myDiv = document.getElementById("wordOutput");
+    myDiv.value = domString;
+}
