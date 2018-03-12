@@ -5,32 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Holiday Message Translation</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/main.css">
 </head>
 <body>
     <h1>Holiday Message Translator</h1>
-    <p>Thanks for visiting the Holiday Message Translator site. To begin, please type your message and select a language.</p>
+    <h3>Impress your friends, family, and collegues with a personalized message.</h3>
+    <p>To begin, please type your message and select a language.</p>
 
-    <div id="input">
-        <textarea name="Message" rows="4" cols="90">Type your message here</textarea>
+    <div>
+        <textarea name="Message" id = "input" rows="4" cols="90" placeholder="Type your message here"></textarea>
     </div>    
         <br>
-    <div id="spanish">        
-        <input type="button" value="Translate to Spanish">
+    <div>
+        <input type="button" value="Translate to Spanish" id="spanish" class="buttons">
+        <input type="button" value="Translate to German" id="german" class="buttons">
+        <input type="button" value="Translate to Esperanto" id="esperanto" class="buttons">
     </div>
-    <div id="german">       
-        <input type="button" value="Translate to German">
-    </div> 
-    <div id="esperanto">    
-        <input type="button" value="Translate to Esperanto">
+    
+    <div class="translate">
+        <textarea id="wordOutput" name="Translation" rows="4" cols="90" placeholder="Translation will appear here"></textarea>
     </div>
-    <div id="output">
-        <textarea name="Translation" rows="4" cols="90">Translation will appear here</textarea>
-    </div>
-
-
     <footer>
-        <a href="https://github.com/nathanpabst/translate/">Visit me on GitHub</a>
+        <a href="https://github.com/nathanpabst/">Visit me on GitHub</a>
     </footer>
     <script src="main.js"></script>
 </body>
